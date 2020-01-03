@@ -22,8 +22,8 @@ namespace Prism.Navigation
 
         public static PageNavigationInfo GetPageNavigationInfo(string name)
         {
-            if (_pageRegistrationCache.ContainsKey(name))
-                return _pageRegistrationCache[name];
+            if (_pageRegistrationCache.TryGetValue(name, out var navigationInfo))
+                return navigationInfo;
 
             return null;
         }

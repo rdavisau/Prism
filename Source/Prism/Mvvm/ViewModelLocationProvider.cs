@@ -121,8 +121,8 @@ namespace Prism.Mvvm
             var viewKey = view.GetType().ToString();
 
             // Mapping of view models base on view type (or instance) goes here
-            if (_factories.ContainsKey(viewKey))
-                return _factories[viewKey]();
+            if (_factories.TryGetValue(viewKey, out var viewModelFactory))
+                return viewModelFactory();
 
             return null;
         }
@@ -136,8 +136,8 @@ namespace Prism.Mvvm
         {
             var viewKey = view.ToString();
 
-            if (_typeFactories.ContainsKey(viewKey))
-                return _typeFactories[viewKey];
+            if (_typeFactories.TryGetValue(viewKey, out var viewModelType))
+                return viewModelType;
 
             return null;
         }
